@@ -1560,7 +1560,7 @@ ngx_http_upsync_consul_services_parse_json(void *data)
             if (tag == NULL) {
                 continue;
             }
-            if (ngx_strncmp(tag, "weight=", 7) == 0) {
+            if (ngx_strncmp(tag, "weight:", 7) == 0) {
                 attr_value = ngx_atoi(tag + 7, (size_t)ngx_strlen(tag) - 7);
 
                 if (attr_value == NGX_ERROR || attr_value <= 0) {
@@ -1572,7 +1572,7 @@ ngx_http_upsync_consul_services_parse_json(void *data)
                     upstream_conf->weight = attr_value;
                 }
             }
-            if (ngx_strncmp(tag, "max_fails=", 10) == 0) {
+            if (ngx_strncmp(tag, "max_fails:", 10) == 0) {
                 attr_value = ngx_atoi(tag + 10, (size_t)ngx_strlen(tag) - 10);
 
                 if (attr_value == NGX_ERROR || attr_value < 0) {
@@ -1584,7 +1584,7 @@ ngx_http_upsync_consul_services_parse_json(void *data)
                     upstream_conf->max_fails = attr_value;
                 }
             }
-            if (ngx_strncmp(tag, "fail_timeout=", 13) == 0) {
+            if (ngx_strncmp(tag, "fail_timeout:", 13) == 0) {
                 ngx_str_t  value = {ngx_strlen(tag) - 13, tag + 13};
                 attr_value = ngx_parse_time(&value, 1);
 
